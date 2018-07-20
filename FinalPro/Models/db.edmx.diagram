@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="00efbbfe8b1443fdaf77da43c44c4aa3" Name="Diagram1">
+        <EntityTypeShape EntityType="libraffModel.Author" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="libraffModel.Book" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="libraffModel.FK__Books__AuthorID__145C0A3F" />
+        <EntityTypeShape EntityType="libraffModel.BookToReader" Width="1.5" PointX="5" PointY="1.25" />
+        <EntityTypeShape EntityType="libraffModel.Reader" Width="1.5" PointX="2.75" PointY="5.25" />
+        <AssociationConnector Association="libraffModel.FK__BookToRea__BoodI__267ABA7A" />
+        <AssociationConnector Association="libraffModel.FK__BookToRea__Reade__25869641" />
+        <EntityTypeShape EntityType="libraffModel.Moderator" Width="1.5" PointX="7" PointY="1.25" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

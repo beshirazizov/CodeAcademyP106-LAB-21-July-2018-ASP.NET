@@ -1,0 +1,51 @@
+﻿@using FinalPro.Models;
+@model List<Book>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row libraff">
+
+    @foreach (Book bk in Model)
+    {
+        <div class="col-md-4 book">
+                <div class="card cardBook" style="width: 18rem;">
+                    <img class="card-img-top bookimg" src="~/Public/images/@bk.Cover">
+                    <div class="card-body">
+                        <h5 class="card-title">@bk.Name</h5>
+                        <p class="card-text">@bk.Author.Name</p>
+                        <p class="card-text">@bk.Available available of @bk.Quantity</p>
+                        @if (Session["loggeduser"] == null)
+                        {
+                            <a href="/Home/Login" class="btn btn-primary btnRead">Add to My Books</a>
+                        }
+                        else
+                        {
+                            <a href="/Home/Addbook?bookID=@bk.ID" class="btn btn-primary btnRead">Add to My Books</a>
+
+                        }
+                    </div>
+                </div>
+        </div>
+    }
+</div>
+<nav class="text-center">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (int i = 0; i <= ViewBag.Pages / 9; ++i)
+        {
+            <li><a href="/Home/Index?skip=@(i*9)">@(i + 1)</a></li>
+        }
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

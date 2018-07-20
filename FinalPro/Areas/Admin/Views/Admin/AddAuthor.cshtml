@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-danger" style="margin:20px">
+        <p>@ViewBag.error</p>
+    </div>
+}
+@if (ViewBag.succ != null)
+{
+    <div class="alert alert-success" style="margin:20px">
+        <p>@ViewBag.succ</p>
+    </div>
+}
+
+<div style="margin:50px; width:400px;">
+    <form method="post">
+        <div class="form-group">
+            <input type="text" name="authorN" class="form-control" id="authorN" placeholder="Author name">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Author</button>
+    </form>
+</div>
+

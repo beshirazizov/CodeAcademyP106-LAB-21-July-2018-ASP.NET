@@ -1,0 +1,35 @@
+﻿@using FinalPro.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered table-striped" style="margin-top:30px">
+                <thead style="text-align:center">
+                <th>Name</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Available</th>
+                <th>Delete</th>
+                </thead>
+                <tbody>
+                    @foreach (Book bk in ViewBag.Books)
+                    {
+                        <tr style="text-align:center">
+                            <td>@bk.Name</td>
+                            <td>@bk.Author.Name</td>
+                            <td>@bk.Descript</td>
+                            <td>@bk.Quantity.ToString()</td>
+                            <td>@bk.Available.ToString()</td>
+                            <td><a href="/Admin/Admin/DeleteBook?bkid=@bk.ID" style="color:red"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

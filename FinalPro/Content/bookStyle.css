@@ -1,0 +1,30 @@
+﻿.libraff{
+    margin:50px;
+}
+
+.book {
+    margin-bottom: 50px;
+}
+.cardBook{
+    padding: 0px!important;
+    width: 100%!important;
+}
+.bookimg {
+    height: 260px;
+    width: 60%;
+    box-shadow: 1px 1px 30px 1px gray;
+    margin: auto;
+    display:block;
+}
+.card-title{
+    font-size:1.5em;
+    font-weight:bold;
+    padding-top: 10px;
+    text-align:center;
+}
+.card-text {
+    text-align: center;
+}
+.btnRead{
+    display: block;
+}

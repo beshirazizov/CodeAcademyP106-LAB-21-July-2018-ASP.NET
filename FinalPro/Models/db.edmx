@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="libraffModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Descript" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pdf" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cover" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Available" Type="int" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="Status" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="BookToReaders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReaderID" Type="int" />
+          <Property Name="BoodID" Type="int" />
+        </EntityType>
+        <EntityType Name="Moderators">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Readers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Books__AuthorID__145C0A3F">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookToRea__BoodI__267ABA7A">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="BookToReaders" Type="Self.BookToReaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookToReaders">
+              <PropertyRef Name="BoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookToRea__Reade__25869641">
+          <End Role="Readers" Type="Self.Readers" Multiplicity="0..1" />
+          <End Role="BookToReaders" Type="Self.BookToReaders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookToReaders">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="libraffModelStoreContainer">
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookToReaders" EntityType="Self.BookToReaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moderators" EntityType="Self.Moderators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Readers" EntityType="Self.Readers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Books__AuthorID__145C0A3F" Association="Self.FK__Books__AuthorID__145C0A3F">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookToRea__BoodI__267ABA7A" Association="Self.FK__BookToRea__BoodI__267ABA7A">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookToReaders" EntitySet="BookToReaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookToRea__Reade__25869641" Association="Self.FK__BookToRea__Reade__25869641">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="BookToReaders" EntitySet="BookToReaders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="libraffModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="libraffModel.FK__Books__AuthorID__145C0A3F" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descript" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pdf" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="AuthorID" Type="Int32" />
+          <NavigationProperty Name="Author" Relationship="libraffModel.FK__Books__AuthorID__145C0A3F" FromRole="Book" ToRole="Author" />
+          <Property Name="Available" Type="Int32" />
+          <NavigationProperty Name="BookToReaders" Relationship="libraffModel.FK__BookToRea__BoodI__267ABA7A" FromRole="Book" ToRole="BookToReader" />
+          <Property Name="Status" Type="Byte" />
+        </EntityType>
+        <EntityContainer Name="libraffEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <AssociationSet Name="FK__Books__AuthorID__145C0A3F" Association="libraffModel.FK__Books__AuthorID__145C0A3F">
+            <End Role="Author" EntitySet="Authors" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <EntitySet Name="BookToReaders" EntityType="libraffModel.BookToReader" />
+          <EntitySet Name="Readers" EntityType="libraffModel.Reader" />
+          <AssociationSet Name="FK__BookToRea__BoodI__267ABA7A" Association="libraffModel.FK__BookToRea__BoodI__267ABA7A">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BookToReader" EntitySet="BookToReaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookToRea__Reade__25869641" Association="libraffModel.FK__BookToRea__Reade__25869641">
+            <End Role="Reader" EntitySet="Readers" />
+            <End Role="BookToReader" EntitySet="BookToReaders" />
+          </AssociationSet>
+          <EntitySet Name="Moderators" EntityType="libraffModel.Moderator" />
+        </EntityContainer>
+        <Association Name="FK__Books__AuthorID__145C0A3F">
+          <End Type="libraffModel.Author" Role="Author" Multiplicity="0..1" />
+          <End Type="libraffModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BookToReader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReaderID" Type="Int32" />
+          <Property Name="BoodID" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="libraffModel.FK__BookToRea__BoodI__267ABA7A" FromRole="BookToReader" ToRole="Book" />
+          <NavigationProperty Name="Reader" Relationship="libraffModel.FK__BookToRea__Reade__25869641" FromRole="BookToReader" ToRole="Reader" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookToReaders" Relationship="libraffModel.FK__BookToRea__Reade__25869641" FromRole="Reader" ToRole="BookToReader" />
+        </EntityType>
+        <Association Name="FK__BookToRea__BoodI__267ABA7A">
+          <End Type="libraffModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="libraffModel.BookToReader" Role="BookToReader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookToReader">
+              <PropertyRef Name="BoodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookToRea__Reade__25869641">
+          <End Type="libraffModel.Reader" Role="Reader" Multiplicity="0..1" />
+          <End Type="libraffModel.BookToReader" Role="BookToReader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reader">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookToReader">
+              <PropertyRef Name="ReaderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Moderator">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="libraffModelStoreContainer" CdmEntityContainer="libraffEntities">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="libraffModel.Author">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="libraffModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
+                <ScalarProperty Name="Pdf" ColumnName="Pdf" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookToReaders">
+            <EntityTypeMapping TypeName="libraffModel.BookToReader">
+              <MappingFragment StoreEntitySet="BookToReaders">
+                <ScalarProperty Name="BoodID" ColumnName="BoodID" />
+                <ScalarProperty Name="ReaderID" ColumnName="ReaderID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readers">
+            <EntityTypeMapping TypeName="libraffModel.Reader">
+              <MappingFragment StoreEntitySet="Readers">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moderators">
+            <EntityTypeMapping TypeName="libraffModel.Moderator">
+              <MappingFragment StoreEntitySet="Moderators">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

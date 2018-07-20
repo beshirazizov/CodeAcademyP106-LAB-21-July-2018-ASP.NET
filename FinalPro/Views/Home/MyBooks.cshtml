@@ -1,0 +1,32 @@
+﻿@using FinalPro.Models;
+@model List<BookToReader>
+
+@{
+    ViewBag.Title = "MyBooks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger" style="margin-top:20px">
+        <p>@TempData["error"]</p>
+    </div>
+}
+
+<div class="row libraff">
+    @foreach (BookToReader btr in Model)
+    {
+        <div class="col-md-4 book">
+            <div class="card cardBook" style="width: 18rem;">
+                <img class="card-img-top bookimg" src="~/Public/images/@btr.Book.Cover">
+                <div class="card-body">
+                    <h5 class="card-title">@btr.Book.Name</h5>
+                    <p class="card-text">@btr.Book.Author.Name</p>
+                    <a href="/Home/Read?bookID=@btr.Book.ID" class="btn btn-primary btnRead">Read</a>
+                    <a href="/Home/Return?bookID=@btr.Book.ID" class="btn btn-danger btnRead" style="margin-top:10px">Return Book</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
